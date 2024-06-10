@@ -6,12 +6,12 @@ import Connect from "@/components/wallet";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Connect />
       <Hero />
       <MintCountDown />
       <Mints />
       <FAQ />
-    </main>
+    </>
   );
 }

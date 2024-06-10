@@ -5,10 +5,21 @@ import Image from "next/image";
 import { useAccount } from "wagmi";
 import { base } from "wagmi/chains";
 import { mintData } from "@/utils/memes";
-import { Address, encodeAbiParameters, parseAbiParameters, parseEther } from 'viem';
-import { writeContract } from '@wagmi/core'
-import {zoraMintAbi} from "@/utils/abi";
-import {CONTRACT_ADDRESS, mintReferral, config, minterAddress,mintFee} from "@/wagmi";
+import {
+  Address,
+  encodeAbiParameters,
+  parseAbiParameters,
+  parseEther,
+} from "viem";
+import { writeContract } from "@wagmi/core";
+import { zoraMintAbi } from "@/utils/abi";
+import {
+  CONTRACT_ADDRESS,
+  mintReferral,
+  config,
+  minterAddress,
+  mintFee,
+} from "@/wagmi";
 function Mints() {
   const [displayDialog, setDisplayDialog] = React.useState<boolean>(false);
   const account = useAccount();
@@ -47,36 +58,30 @@ function Mints() {
     };
   }, [displayDialog]);
 
-
   // Mint function
- async function handleMint() {
-
-  try{
-    const minterArguments  = encodeAbiParameters(
-      [
-        { name: 'mintTo', type: 'address' },
-        { name: 'comment', type: 'string' },
-      ],
-      [account.address as Address, comment]
-    )
-    const mintFeeInEth = parseEther(mintFee.toString());
-    const result = await writeContract(config, {
-      abi:zoraMintAbi,
-      address: CONTRACT_ADDRESS,
-      functionName: 'mintWithRewards',
-      args:[minterAddress, 1, input, minterArguments, mintReferral],
-      value:BigInt(input) * mintFeeInEth, 
-      chainId:base.id,
-      chain:base,
-    })
+  async function handleMint() {
+    try {
+      const minterArguments = encodeAbiParameters(
+        [
+          { name: "mintTo", type: "address" },
+          { name: "comment", type: "string" },
+        ],
+        [account.address as Address, comment]
+      );
+      const mintFeeInEth = parseEther(mintFee.toString());
+      const result = await writeContract(config, {
+        abi: zoraMintAbi,
+        address: CONTRACT_ADDRESS,
+        functionName: "mintWithRewards",
+        args: [minterAddress, 1, input, minterArguments, mintReferral],
+        value: BigInt(input) * mintFeeInEth,
+        chainId: base.id,
+        chain: base,
+      });
+    } catch (e) {
+      console.log("declined");
+    }
   }
-  catch(e){
-    console.log('declined');
-  }
-  }
-  
-
-  
 
   return (
     <section id="art" className="p-[7vw] bg-[--blue]">
@@ -168,7 +173,7 @@ function Mints() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-[40vw] mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-5 w-[90vw] lg:w-[40vw] mx-auto">
         {mintData.map((item, index) => (
           <div
             key={index}

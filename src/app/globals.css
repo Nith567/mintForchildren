@@ -13,6 +13,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .bg-meme {
   background-image: url(https://assets-global.website-files.com/663b0e68b97cc609cd859232/663c55990a812c0499a0d5b0_meme-bitmap.png);
   background-position: 50%;

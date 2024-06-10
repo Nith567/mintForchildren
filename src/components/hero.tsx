@@ -91,7 +91,7 @@ function Hero() {
           zIndex: 3000,
           left: "0",
         }}
-        className="h-screen w-screen font-bold text-[6rem] text-white flex flex-col justify-between items-center"
+        className="h-screen w-screen font-bold py-[15vh] lg:py-0 text-[3rem] lg:text-[6rem] text-white flex flex-col justify-between items-center"
       >
         <p className={roboto_mono.className}>
           <Character char="F" />
