@@ -189,6 +189,7 @@ function Mints() {
             </div>
 
             <button
+              disabled={account.address === undefined}
               onClick={() => setDisplayDialog(true)}
               className="flex flex-row items-center gap-3 cursor-pointer hover:bg-neutral-800 rounded-md text-sm shake px-3 py-2 mx-auto bg-black text-white"
             >

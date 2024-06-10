@@ -7,7 +7,7 @@ function Connect() {
   const { disconnect } = useDisconnect();
 
   return (
-    <div className="fixed bottom-10 left-10 z-[3000]">
+    <div className="fixed bottom-10 left-10 z-[7000]">
       {address ? (
         <button
           className="bg-white text-black px-3 py-1.5 text-sm font-medium cursor-pointer transition duration-300 ease-in-out"

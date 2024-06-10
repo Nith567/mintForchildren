@@ -74,9 +74,9 @@ function Hero() {
   return (
     <section className="relative custom-h w-screen bg-[--blue]">
       <div
-        className={`${roboto_mono.className} text-white h-screen text-[25px] leading-[3rem] p-8 lg:text-[40px] text-right flex flex-col items-end justify-end`}
+        className={`${roboto_mono.className} relative z-[5000] text-white h-screen text-[15px] leading-5 lg:leading-[3rem] p-8 lg:text-[40px] text-right flex flex-col items-end justify-end`}
       >
-        <span className="lg:text-base py-3">↓ SCROLL&nbsp;DOWN</span>
+        <span className="text-xs lg:text-base py-3">↓ SCROLL&nbsp;DOWN</span>
         <div>
           A COLLECTIVE <br />
           DREAM
