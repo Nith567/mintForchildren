@@ -84,7 +84,7 @@ function Mints() {
   }
 
   return (
-    <section id="art" className="p-[7vw] bg-[--blue]">
+    <section id="art" className="p-[3vw] lg:p-[7vw] bg-[--blue]">
       {/*********************** DIALOG BOX *********************************/}
       {displayDialog && (
         <div

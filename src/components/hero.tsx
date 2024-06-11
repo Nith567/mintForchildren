@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Roboto_Mono } from "next/font/google";
-import { Bungee } from "next/font/google";
 import Character from "./character";
+import { britney } from "@/app/fonts";
 const roboto_mono = Roboto_Mono({ subsets: ["latin"] });
-const bungee = Bungee({ subsets: ["latin"], weight: ["400"] });
 
 const LAYER_1 = 5;
 const LAYER_1_MULTIPLIER = LAYER_1 / 2500;
@@ -91,46 +90,46 @@ function Hero() {
           zIndex: 3000,
           left: "0",
         }}
-        className="h-screen w-screen font-bold py-[15vh] lg:py-0 text-[3rem] lg:text-[6rem] text-white flex flex-col justify-between items-center"
+        className="h-screen w-screen font-bold py-[15vh] lg:py-0 text-[3em] lg:text-[7em] text-white flex flex-col justify-between items-center"
       >
         <p className={roboto_mono.className}>
           <Character char="F" />
           <Character
-            char="O"
-            className={bungee.className}
+            char="o"
+            className={britney.className}
             elevation={layers.layer1}
           />
           <Character char="R" />
           <Character char=" " />
           <Character
-            char="T"
-            className={bungee.className}
+            char="t"
+            className={britney.className}
             elevation={layers.layer2}
           />
           <Character char="H" elevation={layers.layer1} />
           <Character
-            char="E"
-            className={bungee.className}
+            char="e"
+            className={britney.className}
             elevation={layers.layer2}
           />
         </p>
         <p className={roboto_mono.className}>
           <Character
-            char="C"
+            char="c"
             elevation={-layers.layer2}
-            className={bungee.className}
+            className={britney.className}
           />
           <Character char="H" />
           <Character
-            char="I"
+            char="i"
             elevation={-layers.layer1}
-            className={bungee.className}
+            className={britney.className}
           />
           <Character char="L" />
           <Character
-            char="D"
+            char="d"
             elevation={-layers.layer3}
-            className={bungee.className}
+            className={britney.className}
           />
           <Character char="R" elevation={-layers.layer4} />
           <Character char="E" />

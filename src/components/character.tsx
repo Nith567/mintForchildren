@@ -13,8 +13,12 @@ function Character({
     <span
       style={
         elevation !== undefined
-          ? { position: "relative", top: `${elevation}rem` }
-          : {}
+          ? {
+              position: "relative",
+              top: `${elevation}rem`,
+              letterSpacing: "0.2em",
+            }
+          : { letterSpacing: "0.1em" }
       }
       className={className}
     >
