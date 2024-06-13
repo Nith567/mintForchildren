@@ -5,6 +5,7 @@ import Image from "next/image";
 import Footer from "@/components/footer";
 import Head from "next/head";
 import { Providers } from "./providers";
+import ogImage from "../../public/og.jpg";
 const ibm = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "For The Children 2024: Shaolin Art Center",
     images: [
       {
-        url: "/og.jpg",
+        url: ogImage.src,
         width: 800,
         height: 600,
       },
