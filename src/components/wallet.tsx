@@ -19,7 +19,7 @@ const wagmiAbi = [
 function Connect() {
   const { address } = useAccount();
   const [displayDialog, setDisplayDialog] = useState<boolean>(false);
-  const [input, setInput] = useState<number>(0.01);
+  const [input, setInput] = useState<number>(0.1);
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
 
@@ -43,7 +43,7 @@ function Connect() {
     } else {
       htmlElement.style.overflowY = "auto";
       htmlElement.style.height = "auto";
-      setInput(0.01);
+      setInput(0.1);
     }
 
     return () => {
@@ -91,7 +91,7 @@ function Connect() {
                 name="price"
                 min={0}
                 value={input}
-                step={0.001}
+                step={0.01}
                 onChange={(e) => setInput(parseFloat(e.target.value))}
                 className="w-full h-9 flex items-center justify-center rounded-full text-center border border-neutral-500"
               />
