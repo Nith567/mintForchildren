@@ -57,7 +57,7 @@ function Connect() {
       abi: wagmiAbi,
       address: "0x8B212F3a582dFBF87da7ca7Dc51dB05f7d60b8Bb",
       functionName: "sendFunds",
-      value: parseEther(`${input}`),
+      value: parseEther(input.toString()),
       chainId: base.id,
       chain: base,
     });
