@@ -20,9 +20,7 @@ export const metadata: Metadata = {
     siteName: "For The Children 2024: Shaolin Art Center",
     images: [
       {
-        url: ogImage.src,
-        width: 800,
-        height: 600,
+        url: "https://res.cloudinary.com/djwhxlpk5/image/upload/v1718286114/mint-forthechildren/ogImage.jpg",
       },
     ],
     locale: "en_US",
