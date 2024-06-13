@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 import { base } from "wagmi/chains";
-import { mintData } from "@/utils/memes";
+import { mintData } from "@/utils/mints";
 import {
   Address,
   encodeAbiParameters,
@@ -24,6 +24,11 @@ function Mints() {
   const [displayDialog, setDisplayDialog] = React.useState<boolean>(false);
   const account = useAccount();
   const [comment, setComment] = React.useState<string>("");
+  const [transaction, setTransaction] = React.useState<{
+    token: number;
+    contractAddress: `0x${string}`;
+    mintFee: number;
+  } | null>(null);
   const [displayCustom, setDisplayCustom] = React.useState<boolean>(false);
   const [input, setInput] = React.useState<number>(0);
 
@@ -48,6 +53,7 @@ function Mints() {
       htmlElement.style.overflowY = "auto";
       htmlElement.style.height = "auto";
       setInput(0);
+      setTransaction(null);
       setComment("");
       setDisplayCustom(false);
     }
@@ -60,6 +66,8 @@ function Mints() {
 
   // Mint function
   async function handleMint() {
+    console.log(transaction);
+    if (!transaction) return;
     try {
       const minterArguments = encodeAbiParameters(
         [
@@ -68,12 +76,18 @@ function Mints() {
         ],
         [account.address as Address, comment]
       );
-      const mintFeeInEth = parseEther(mintFee.toString());
+      const mintFeeInEth = parseEther(transaction.mintFee.toString());
       const result = await writeContract(config, {
         abi: zoraMintAbi,
-        address: CONTRACT_ADDRESS,
+        address: transaction.contractAddress,
         functionName: "mintWithRewards",
-        args: [minterAddress, 1, input, minterArguments, mintReferral],
+        args: [
+          minterAddress,
+          transaction.token,
+          input,
+          minterArguments,
+          mintReferral,
+        ],
         value: BigInt(input) * mintFeeInEth,
         chainId: base.id,
         chain: base,
@@ -81,6 +95,15 @@ function Mints() {
     } catch (e) {
       console.log("declined");
     }
+  }
+
+  function handleClickMintCard(
+    token: number,
+    contractAddress: `0x${string}`,
+    mintFee: number
+  ) {
+    setTransaction({ token, contractAddress, mintFee });
+    setDisplayDialog(true);
   }
 
   return (
@@ -179,18 +202,35 @@ function Mints() {
             key={index}
             className="flex flex-col items-start gap-4 mb-5 pb-4 bg-white rounded-md overflow-hidden"
           >
-            <div className="bg-[--blue]">
-              <img
-                src={item.src}
-                alt="cat image"
-                loading="lazy"
-                className="h-[50vh] w-full block object-cover "
-              />
+            <div className="bg-white">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt="cat image"
+                  loading="lazy"
+                  className="h-[50vh] w-full block object-cover "
+                />
+              ) : (
+                <video
+                  src={item.video}
+                  preload="auto"
+                  autoPlay
+                  loop
+                  playsInline
+                  className="h-[50vh] w-full block object-cover "
+                ></video>
+              )}
             </div>
 
             <button
               disabled={account.address === undefined}
-              onClick={() => setDisplayDialog(true)}
+              onClick={() =>
+                handleClickMintCard(
+                  item.token,
+                  item.contractAddress,
+                  item.mintFee
+                )
+              }
               className="flex flex-row items-center gap-3 cursor-pointer hover:bg-neutral-800 rounded-md text-sm shake px-3 py-2 mx-auto bg-black text-white"
             >
               <Image src="/sphere.png" alt="sphere" height={18} width={18} />
