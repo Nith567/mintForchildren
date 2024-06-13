@@ -60,10 +60,10 @@ body {
   }
 }
 
-a:hover {
+/* a:hover {
   animation: shake 0.5s;
   animation-iteration-count: infinite;
-}
+} */
 
 /* .shake:hover {
   animation: shake 0.5s;

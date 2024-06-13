@@ -15,6 +15,7 @@ function Character({
         elevation !== undefined
           ? {
               position: "relative",
+              zIndex: 5000,
               top: `${elevation}rem`,
               letterSpacing: "0.2em",
             }

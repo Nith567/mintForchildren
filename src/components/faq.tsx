@@ -4,21 +4,25 @@ import React from "react";
 function FAQ() {
   return (
     <section className="flex flex-col bg-[--blue] text-white">
-      <div className="flex md:flex-row flex-col border-b border-neutral-300 py-16">
+      <div className="flex md:flex-row flex-col py-16">
         <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]">
           <h2 className="text-[2rem] md:text-[2rem] mb-8">
-            What is Be More BASED?
+            For The Children 2024
           </h2>
           <p className="text-[0.8rem] md:text-base">
-            Be More BASED celebrates the works of several successful onchain
-            artists, content creators, and builders.
+            In 2023, we brought food, pencils, bookbags, notebooks, and
+            entertainment to over 1000 children in the Dominican Republic. We
+            helped rebuild the local church, giving the children a place of
+            faith and community.
             <br />
             <br />
-            On May 15th, all artists will release their own unique works to be
-            minted for 48 hours
-            <br />
-            <br />
-            This drop is supported by The Creators and Base.
+            From June 10-17th 2024, we are funding another trip to the Dominican
+            Republic. We are unveiling the new Shaolin Art Center, curated by
+            the Shaolin Financial Charity Army, a collaboration between members
+            of Wu-Tang Clan, Jasmine's Army, & TheCreators. Minting art from
+            participating artists will raise funds for the trip & supplies we
+            will deliver to children in need. You can also donate ETH directly
+            to the cause.
           </p>
         </div>
         <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]">
@@ -47,21 +51,19 @@ function FAQ() {
       <div className="flex md:flex-row flex-col py-16">
         <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]">
           <h2 className="text-[2rem] md:text-[2rem] mb-8">
-            BASE is now supported on The Creators
+            What's next for the Shaolin Art Center?{" "}
           </h2>
           <p className="text-[0.8rem] md:text-base">
-            Creators on the The Creators platform can now utilize the BASE chain
-            to create onchain.
+            At the end of this week, we will have selected our first official
+            Curator. We will be in talks with leaders among the community who
+            participate in this event and show true dedication to the culture,
+            the music, and the message behind it.
+            <br />
+            <br />
+            That curator will then be in charge of curating the next collection,
+            events, & guests, with the full support of The Creators art & tech
+            collective.
           </p>
-          <ul className="pl-[1.5rem] text-[0.8rem] md:text-base list-disc">
-            <li>Deploy your own BASE contracts</li>
-            <li>Mint tokens using Transient innovations</li>
-            <li>Make your own on-demand BASE mint pages</li>
-            <li>
-              Use Transient&apos;s T.R.A.C.E. chips to add provenance to your
-              physical works on BASE
-            </li>
-          </ul>
         </div>
         <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]">
           <p className="text-[0.8rem] md:text-base">

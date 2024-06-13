@@ -11,15 +11,26 @@ const ibm = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BASED",
-  applicationName: "BASED",
+  openGraph: {
+    title: "For The Children 2024: Shaolin Art Center",
+    description:
+      "7 Days of Open Edition Mints & Auctions supporting For The Children - by TheCreators.com & Members of Wu-Tang Clan",
+    url: "https://mint-forchildren.vercel.app/",
+    siteName: "For The Children 2024: Shaolin Art Center",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  title: "For The Children 2024: Shaolin Art Center",
   generator: "Next.js",
-  keywords: [
-    "memetic, memes, based, onchain, nft, nfts, mint, mints, open edition, digital, art, blockchain, crypto, web3",
-  ],
-
   description:
-    "The digital world is memetic. Join us for 48 hours of Open Edition mints with the most based onchain.",
+    "7 Days of Open Edition Mints & Auctions supporting For The Children - by TheCreators.com & Members of Wu-Tang Clan",
 };
 
 export default function RootLayout({
@@ -32,6 +43,7 @@ export default function RootLayout({
       <Providers>
         <Head>
           <link rel="icon" href="/favicon.ico" sizes="any" />
+          <meta property="og:image" content="/og.jpg" />
         </Head>
         <body className={ibm.className}>
           <div className="lg:hidden block">

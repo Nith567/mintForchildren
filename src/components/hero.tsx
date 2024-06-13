@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Roboto_Mono } from "next/font/google";
 import Character from "./character";
 import { britney } from "@/app/fonts";
+import Link from "next/link";
 const roboto_mono = Roboto_Mono({ subsets: ["latin"] });
 
 const LAYER_1 = 5;
@@ -73,12 +74,12 @@ function Hero() {
   return (
     <section className="relative custom-h w-screen bg-[--blue]">
       <div
-        className={`${roboto_mono.className} relative z-[5000] text-white h-screen text-[15px] leading-5 lg:leading-[3rem] p-8 lg:text-[40px] text-right flex flex-col items-end justify-end`}
+        className={`${roboto_mono.className} relative z-[1000] text-white h-screen text-[15px] leading-5 lg:leading-[3rem] p-8 lg:text-[28px] text-right flex flex-col items-end justify-end`}
       >
         <span className="text-xs lg:text-base py-3">↓ SCROLL&nbsp;DOWN</span>
         <div>
-          A COLLECTIVE <br />
-          DREAM
+          MINT TO <br />
+          SUPPORT THE CAUSE
         </div>
       </div>
 
@@ -113,6 +114,19 @@ function Hero() {
             elevation={layers.layer2}
           />
         </p>
+        <Link
+          target="_blank"
+          style={{
+            height: `${dimension.height}vh`,
+            width: `${dimension.width}vw`,
+            position: isFixed ? "fixed" : "absolute",
+            top: isFixed ? `${(100 - dimension.height) / 2}vh` : "auto",
+            bottom: isFixed ? "auto" : "0",
+            zIndex: 4000,
+            left: isFixed ? `${(100 - dimension.width) / 2}vw` : "0",
+          }}
+          href="https://www.spatial.io/s/Shaolin-Art-Center-6662b631a2682d61f54e9701?share=6933393814360874345"
+        />
         <p className={roboto_mono.className}>
           <Character
             char="c"
@@ -147,7 +161,7 @@ function Hero() {
           zIndex: 1000,
           left: isFixed ? `${(100 - dimension.width) / 2}vw` : "0",
         }}
-        className="bg-green-500"
+        className="bg-black"
       >
         <video
           className="w-full h-full object-cover object-center block"
@@ -162,14 +176,7 @@ function Hero() {
           data-wf-ignore="true"
           data-object-fit="cover"
         >
-          <source
-            src="https://cdn.prod.website-files.com/62300bb50484e326b9778ca4/623d6a3821f09efaf69c420a_metaproject-transcode.mp4"
-            data-wf-ignore="true"
-          />
-          <source
-            src="https://cdn.prod.website-files.com/62300bb50484e326b9778ca4/623d6a3821f09efaf69c420a_metaproject-transcode.webm"
-            data-wf-ignore="true"
-          />
+          <source src="/Shaolin_Art.mp4" data-wf-ignore="true" />
         </video>
       </div>
     </section>
