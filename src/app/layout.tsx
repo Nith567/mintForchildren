@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "For The Children 2024: Shaolin Art Center",
     images: [
       {
-        url: "/og.jpg",
+        url: "https://mint-forchildren.vercel.app/og.jpg",
         width: 800,
         height: 600,
       },
