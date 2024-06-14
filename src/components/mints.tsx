@@ -5,21 +5,10 @@ import Image from "next/image";
 import { useAccount } from "wagmi";
 import { base } from "wagmi/chains";
 import { mintData } from "@/utils/mints";
-import {
-  Address,
-  encodeAbiParameters,
-  parseAbiParameters,
-  parseEther,
-} from "viem";
+import { Address, encodeAbiParameters, parseEther } from "viem";
 import { writeContract } from "@wagmi/core";
 import { zoraMintAbi } from "@/utils/abi";
-import {
-  CONTRACT_ADDRESS,
-  mintReferral,
-  config,
-  minterAddress,
-  mintFee,
-} from "@/wagmi";
+import { mintReferral, config, minterAddress } from "@/wagmi";
 function Mints() {
   const [displayDialog, setDisplayDialog] = React.useState<boolean>(false);
   const account = useAccount();
@@ -161,7 +150,7 @@ function Mints() {
               </button>
               <button
                 onClick={() => setDisplayCustom(true)}
-                className="flex bg-black px-3 py-1 text-white w-full rounded-md"
+                className="flex px-3 py-1 w-full rounded-md"
               >
                 custom
               </button>
@@ -202,22 +191,23 @@ function Mints() {
             key={index}
             className="flex flex-col items-start gap-4 mb-5 pb-4 bg-white rounded-md overflow-hidden"
           >
-            <div className="bg-white">
+            <div className="bg-white relative inline-block h-[50vh] w-full overflow-hidden ">
               {item.image ? (
                 <img
                   src={item.image}
                   alt="cat image"
                   loading="lazy"
-                  className="h-[50vh] w-full block object-cover "
+                  className="h-[50vh] w-full block object-cover transition-all duration-300 hover:scale-110"
                 />
               ) : (
                 <video
                   src={item.video}
                   preload="auto"
-                  autoPlay
-                  loop
-                  playsInline
-                  className="h-[50vh] w-full block object-cover "
+                  autoPlay={true}
+                  loop={true}
+                  muted={true}
+                  playsInline={true}
+                  className="h-[50vh] w-full block object-cover transition-all duration-300 hover:scale-110"
                 ></video>
               )}
             </div>

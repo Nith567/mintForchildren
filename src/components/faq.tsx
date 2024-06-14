@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+import sponsors from "../../public/sponsors.jpg";
 
 function FAQ() {
   return (
@@ -65,18 +67,10 @@ function FAQ() {
             collective.
           </p>
         </div>
-        <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]">
-          <p className="text-[0.8rem] md:text-base">
-            Sign up here for access to Transient&apos;s no-code creator
-            platform,
-            <a href="https://lab.transientlabs.xyz/" target="_blank">
-              The Lab
-            </a>
-            (currently in Beta), right now. We&apos;ll be extending more invites
-            soon.
-          </p>
-          <p className="text-[0.8rem]">Sign Ups Closed</p>
-        </div>
+        <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]"></div>
+      </div>
+      <div className="bg-white py-6">
+        <Image src={sponsors} alt="Sponsors" className="w-full h-auto" />
       </div>
     </section>
   );

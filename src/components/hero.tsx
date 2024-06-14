@@ -170,7 +170,7 @@ function Hero() {
           poster="https://cdn.prod.website-files.com/62300bb50484e326b9778ca4/623d6a3821f09efaf69c420a_metaproject-poster-00001.jpg"
           muted={true}
           playsInline={true}
-          data-wf-ignore="true"
+          data-wf-ignore={true}
           data-object-fit="cover"
         >
           <source src="/Shaolin_Art.mp4" data-wf-ignore="true" />
