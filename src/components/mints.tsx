@@ -64,6 +64,9 @@ function Mints() {
         ],
         [account.address as Address, comment]
       );
+
+
+
       const mintFeeInEth = parseEther(transaction.mintFee.toString());
       const result = await writeContract(config, {
         abi: zoraMintAbi,
@@ -81,7 +84,7 @@ function Mints() {
         chain: base,
       });
     } catch (e) {
-      console.log("declined");
+      console.log("declined",e);
     }
   }
 
