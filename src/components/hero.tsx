@@ -167,7 +167,7 @@ function Hero() {
           className="w-full h-full object-cover object-center block"
           autoPlay={true}
           loop={true}
-          poster="https://cdn.prod.website-files.com/62300bb50484e326b9778ca4/623d6a3821f09efaf69c420a_metaproject-poster-00001.jpg"
+          poster="/og.jpg"
           muted={true}
           playsInline={true}
           data-wf-ignore={true}

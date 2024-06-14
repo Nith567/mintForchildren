@@ -55,7 +55,6 @@ function Mints() {
 
   // Mint function
   async function handleMint() {
-    console.log(transaction);
     if (!transaction) return;
     try {
       const minterArguments = encodeAbiParameters(
