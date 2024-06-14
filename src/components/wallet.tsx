@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useAccount, useConnect, useDisconnect} from "wagmi";
 import { base } from "wagmi/chains";
 import { writeContract } from "@wagmi/core";
-import { config } from "@/wagmi";
+import { config, walletClient } from "@/wagmi";
 import { parseEther } from "viem";
+
 
 const wagmiAbi = [
   {
@@ -54,6 +55,7 @@ function Connect() {
   }, [displayDialog]);
 
   const sendFunds = async () => {
+   await walletClient.switchChain({ id: base.id }) 
     const result = await writeContract(config, {
       abi: wagmiAbi,
       address: "0x8B212F3a582dFBF87da7ca7Dc51dB05f7d60b8Bb",

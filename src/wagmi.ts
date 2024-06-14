@@ -1,6 +1,7 @@
 import { http, createConfig } from "wagmi";
 import { base } from "wagmi/chains";
 import { coinbaseWallet } from "wagmi/connectors";
+import { createWalletClient, custom } from 'viem'
 export const config = createConfig({
   // turn off injected provider discovery
   chains:[base],
@@ -16,6 +17,11 @@ export const config = createConfig({
     [base.id]: http(),
   },
 });
+
+export const walletClient = createWalletClient({
+  chain: base,
+  transport:http(),
+})
 
 export const minterAddress ='0x04E2516A2c207E84a1839755675dfd8eF6302F0a'
 export const mintReferral = '0x76CFa18F5C788E14cA92AA4918e26Ee87148c995';//safe multisigner address
