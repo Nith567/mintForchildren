@@ -29,24 +29,15 @@ function FAQ() {
         </div>
         <div className="py-[1.9rem] flex-[50%] px-[1.5rem] md:px-[5rem]">
           <h2 className="text-[2rem] md:text-[2rem] mb-8">
-            How much will it cost to mint?
+          Curating the Shaolin Art Center
           </h2>
           <p className="text-[0.8rem] md:text-base">
-            Participating creators have priced their works at 0.0042069 ETH or
-            FREE as Open Edition mints. There is no max allowance on minting
-            totals.
+          The Shaolin Art Center is an underground community-owned artspace dedicated to the culture, music, and art of the hiphop movement. To celebrate our inaugural collection & raise awareness for the charity, all participating artists will be donating a portion of their mints to the cause.
+
+
             <br />
             <br />
-            Mints will be supported on BASE/ETH, which can be bridged in advance
-            using{" "}
-            <Link
-              className="underline"
-              href="https://bridge.base.org/deposit"
-              target="_blank"
-            >
-              Base Bridge
-            </Link>
-            .
+            With unique art available be minted for 7 days, it's a great way to support a worthy cause and independent artists at the same time.
           </p>
         </div>
       </div>
