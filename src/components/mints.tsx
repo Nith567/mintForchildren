@@ -188,7 +188,12 @@ function Mints() {
         {mintData.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-start gap-4 mb-5 pb-4 bg-white rounded-md overflow-hidden"
+            style={
+              account.address === undefined
+                ? { paddingBottom: "0" }
+                : { paddingBottom: "1rem" }
+            }
+            className="flex flex-col items-start gap-4 mb-5 bg-white rounded-md overflow-hidden"
           >
             <div className="bg-white relative inline-block h-[50vh] w-full overflow-hidden ">
               {item.image ? (
@@ -213,6 +218,11 @@ function Mints() {
 
             <button
               disabled={account.address === undefined}
+              style={
+                account.address === undefined
+                  ? { display: "none" }
+                  : { display: "flex" }
+              }
               onClick={() =>
                 handleClickMintCard(
                   item.token,
@@ -220,7 +230,7 @@ function Mints() {
                   item.mintFee
                 )
               }
-              className="flex flex-row items-center gap-3 cursor-pointer hover:bg-neutral-800 rounded-md text-sm shake px-3 py-2 mx-auto bg-black text-white"
+              className="flex-row items-center gap-3 cursor-pointer hover:bg-neutral-800 rounded-md text-sm px-3 py-2 mx-auto bg-black text-white"
             >
               <Image src="/sphere.png" alt="sphere" height={18} width={18} />
               <span>Mint</span>
