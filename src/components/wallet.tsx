@@ -75,7 +75,7 @@ function Connect() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-row gap-2 justify-between items-center">
-              <p className="font-semibold text-black">Send ETH</p>
+              <p className="font-semibold text-black">Donate</p>
               <button
                 onClick={() => setDisplayDialog(false)}
                 className="select-none rounded-full hover:bg-red-100 text-black w-5 h-5 text-base flex items-center justify-center leading-0 p-0"
