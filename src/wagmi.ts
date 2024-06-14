@@ -7,8 +7,8 @@ export const config = createConfig({
   multiInjectedProviderDiscovery: false,
   connectors: [
     coinbaseWallet({
-      appName: "Mint zora",
-      preference: "smartWalletOnly",
+      appName: "For the Children 2024: Shaolin Art Center",
+      preference:"all"
     }),
   ],
   ssr: true,
