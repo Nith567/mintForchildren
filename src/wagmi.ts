@@ -3,24 +3,23 @@ import { base } from "wagmi/chains";
 import { coinbaseWallet } from "wagmi/connectors";
 import { createWalletClient, custom } from 'viem'
 export const config = createConfig({
-  // turn off injected provider discovery
   chains:[base],
   multiInjectedProviderDiscovery: false,
   connectors: [
     coinbaseWallet({
       appName: "For the Children 2024: Shaolin Art Center",
-      preference:"all"
+      preference:"eoaOnly"
     }),
   ],
   ssr: true,
   transports: {
-    [base.id]: http(),
+    [base.id]: http("https://base-pokt.nodies.app")
   },
 });
 
 export const walletClient = createWalletClient({
   chain: base,
-  transport:http(),
+  transport:http()
 })
 
 export const minterAddress ='0x04E2516A2c207E84a1839755675dfd8eF6302F0a'
