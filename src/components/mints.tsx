@@ -2,15 +2,18 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { useAccount } from "wagmi";
-import { base } from "wagmi/chains";
+import { useAccount, useSwitchAccount } from "wagmi";
+import { base} from "wagmi/chains";
 import { mintData } from "@/utils/mints";
-import { Address, encodeAbiParameters, parseEther } from "viem";
+import { getAccount } from '@wagmi/core'
+import { Address, encodeAbiParameters, http, parseEther } from "viem";
 import { writeContract } from "@wagmi/core";
 import { zoraMintAbi } from "@/utils/abi";
 import { mintReferral, config, minterAddress } from "@/wagmi";
+import { switchChain } from "viem/actions";
 function Mints() {
   const [displayDialog, setDisplayDialog] = React.useState<boolean>(false);
+
   const account = useAccount();
   const [comment, setComment] = React.useState<string>("");
   const [transaction, setTransaction] = React.useState<{
@@ -55,6 +58,12 @@ function Mints() {
 
   // Mint function
   async function handleMint() {
+    const account = getAccount(config);
+    account.chain = base;
+    const { connector } =getAccount(config);
+if (connector?.switchChain) {
+ await connector?.switchChain({ chainId: base.id});
+       }
     if (!transaction) return;
     try {
       const minterArguments = encodeAbiParameters(
@@ -64,8 +73,6 @@ function Mints() {
         ],
         [account.address as Address, comment]
       );
-
-
 
       const mintFeeInEth = parseEther(transaction.mintFee.toString());
       const result = await writeContract(config, {
@@ -83,6 +90,7 @@ function Mints() {
         chainId: base.id,
         chain: base,
       });
+      console.log(result)
     } catch (e) {
       console.log("declined",e);
     }
