@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect} from "wagmi";
 import { base } from "wagmi/chains";
 import { writeContract } from "@wagmi/core";
-import { config, walletClient } from "@/wagmi";
-import { parseEther } from "viem";
-
-
+import { config } from "@/wagmi";
+import { getAccount } from '@wagmi/core'
+import { Address, parseEther } from "viem";
+import { switchChain } from 'viem/actions';
+import { useWalletClient, usePublicClient} from 'wagmi'
 const wagmiAbi = [
   {
     inputs: [],
@@ -20,6 +21,7 @@ const wagmiAbi = [
 function Connect() {
   const { address } = useAccount();
   const [displayDialog, setDisplayDialog] = useState<boolean>(false);
+  const { data: walletClient } = useWalletClient()
   const [input, setInput] = useState<number>(0.1);
   const { connectors, connect, status, error } = useConnect();
   const [copied, setCopied] = useState(false);
@@ -55,17 +57,29 @@ function Connect() {
   }, [displayDialog]);
 
   const sendFunds = async () => {
-   await walletClient.switchChain({ id: base.id }) 
-    const result = await writeContract(config, {
-      abi: wagmiAbi,
-      address: "0x8B212F3a582dFBF87da7ca7Dc51dB05f7d60b8Bb",
-      functionName: "sendFunds",
-      value: parseEther(input.toString()),
-      chainId: base.id,
-      chain: base,
-    });
-  };
+    try{
+    console.log(address);
+    // const account =getAccount(config);
+    const { connector } =getAccount(config);
 
+if (connector?.switchChain) {
+         await connector?.switchChain({ chainId: base.id});
+       }
+
+if (!walletClient) {
+  throw  new Error('Wallet not connected')
+}
+const [account] = await walletClient.getAddresses()
+const hash = await walletClient.sendTransaction({ 
+  account:account,
+  to: '0x76CFa18F5C788E14cA92AA4918e26Ee87148c995',
+  value: parseEther(input.toString()),
+})
+  }
+  catch(e){
+    console.log(e);
+  };
+  };
   function handleCopyAddress() {
     if (!address) return;
     navigator.clipboard
@@ -126,6 +140,8 @@ function Connect() {
       )}
       <div className="fixed bottom-10 left-10 z-[7000]">
         {address ? (
+
+     
           <div className="flex items-start flex-col gap-3">
             <button
               onClick={() => setDisplayDialog(true)}
