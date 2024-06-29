@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
-import Image from "next/image";
+import React, { useEffect, useRef } from "react";
 import { useAccount, useSwitchAccount } from "wagmi";
 import { base } from "wagmi/chains";
 import { mintData, mintToSupport } from "@/utils/mints";
@@ -11,9 +10,17 @@ import { writeContract } from "@wagmi/core";
 import { zoraMintAbi } from "@/utils/abi";
 import { mintReferral, config, minterAddress } from "@/wagmi";
 import { switchChain } from "viem/actions";
+import Image from "next/image";
+import featuredMint from "../../public/featuredmints.png";
+import { britney } from "@/app/fonts";
+import Link from "next/link";
+
 function Mints() {
   const [displayDialog, setDisplayDialog] = React.useState<boolean>(false);
-
+  const [displayOldMints, setDisplayOldMints] = React.useState<boolean>(false);
+  const containerRefs = useRef<HTMLDivElement[]>([]);
+  const specialMintRef = useRef<HTMLImageElement>(null);
+  const containerRefsNew = useRef<HTMLImageElement[]>([]);
   const account = useAccount();
   const [comment, setComment] = React.useState<string>("");
   const [transaction, setTransaction] = React.useState<{
@@ -105,13 +112,71 @@ function Mints() {
     setDisplayDialog(true);
   }
 
+  function handle3DHover(el: HTMLImageElement | HTMLDivElement | null) {
+    if (!el) return;
+
+    const handleMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const xVal = e.clientX - rect.left;
+      const yVal = e.clientY - rect.top;
+
+      const height = el.clientHeight;
+      const width = el.clientWidth;
+
+      const yRotation = 20 * ((xVal - width / 2) / width);
+      const xRotation = -20 * ((yVal - height / 2) / height);
+
+      const transformString = `perspective(500px) scale(1) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+      el.style.transform = transformString;
+    };
+
+    const resetTransform = () => {
+      el.style.transform = "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+    };
+
+    el.addEventListener("mousemove", handleMove);
+    el.addEventListener("mouseout", resetTransform);
+    el.addEventListener("mousedown", () => {
+      el.style.transform =
+        "perspective(500px) scale(0.9) rotateX(0) rotateY(0)";
+    });
+    el.addEventListener("mouseup", () => {
+      el.style.transform = "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+    });
+
+    return () => {
+      el.removeEventListener("mousemove", handleMove);
+      el.removeEventListener("mouseout", resetTransform);
+      el.removeEventListener("mousedown", () => {
+        el.style.transform =
+          "perspective(500px) scale(0.9) rotateX(0) rotateY(0)";
+      });
+      el.removeEventListener("mouseup", () => {
+        el.style.transform =
+          "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+      });
+    };
+  }
+
+  useEffect(() => {
+    containerRefsNew.current.forEach(handle3DHover);
+  }, [mintToSupport]);
+
+  useEffect(() => {
+    containerRefs.current.forEach(handle3DHover);
+  }, [mintData]);
+
+  useEffect(() => {
+    specialMintRef.current && handle3DHover(specialMintRef.current);
+  }, []);
+
   return (
     <section
       id="art"
       className="p-[3vw] lg:p-[7vw] flex flex-col items-center bg-[--blue] text-white"
     >
       {/*********************** DIALOG BOX *********************************/}
-      {/* {displayDialog && (
+      {displayDialog && (
         <div
           onClick={() => setDisplayDialog(false)}
           className="h-screen w-screen flex items-center justify-center bg-black/80 fixed top-0 left-0 z-[5000]"
@@ -196,62 +261,58 @@ function Mints() {
             </button>
           </div>
         </div>
-      )} */}
+      )}
 
-      {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-5 w-[90vw] lg:w-[40vw] mx-auto">
-        {mintData.map((item, index) => (
-          <div
-            key={index}
-            style={
-              account.address === undefined
-                ? { paddingBottom: "0" }
-                : { paddingBottom: "1rem" }
-            }
-            className="flex flex-col items-start gap-4 mb-5 bg-white rounded-md overflow-hidden"
-          >
-            <div className="bg-white relative inline-block h-[50vh] w-full overflow-hidden ">
-              {item.image ? (
-                <img
-                  src={item.image}
-                  alt="cat image"
-                  loading="lazy"
-                  className="h-[50vh] w-full block object-cover transition-all duration-300 hover:scale-110"
-                />
-              ) : (
-                <video
-                  src={item.video}
-                  preload="auto"
-                  autoPlay={true}
-                  loop={true}
-                  muted={true}
-                  playsInline={true}
-                  className="h-[50vh] w-full block object-cover transition-all duration-300 hover:scale-110"
-                ></video>
-              )}
-            </div>
-
-            <button
-              disabled={account.address === undefined}
-              style={
-                account.address === undefined
-                  ? { display: "none" }
-                  : { display: "flex" }
-              }
-              onClick={() =>
-                handleClickMintCard(
-                  item.token,
-                  item.contractAddress,
-                  item.mintFee
-                )
-              }
-              className="flex-row items-center gap-3 cursor-pointer hover:bg-neutral-800 rounded-md text-sm px-3 py-2 mx-auto bg-black text-white"
+      <div className="min-h-screen p-[3vw] lg:p-[7vw] py-20 flex flex-col items-center justify-center gap-16 bg-[--blue] text-white">
+        <p className="text-center text-xl">
+          Featured mints from selected artists.
+          <br />
+          All funds go towards children.
+        </p>
+        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-14">
+          <MagnetBackground />
+          <Image
+            src={featuredMint}
+            alt="Featured Mints"
+            ref={specialMintRef}
+            className="rounded-xl z-[200] w-[90%] h-auto lg:w-[500px] lg:h-[500px] border-solid border-b-4 border-r-4 border-white"
+          />
+          <div className="relative z-[300] flex flex-col gap-4 items-center lg:items-start w-[90%] lg:w-[400px] lg:text-left text-center">
+            <p
+              className={`${britney.className} text-2xl md:text-[65px] leading-none`}
             >
-              <Image src="/sphere.png" alt="sphere" height={18} width={18} />
-              <span>Mint</span>
-            </button>
+              FoR tHe cHiLdReN
+            </p>
+            <p>
+              Feeding children, one mint at a time. Each mint goes to paying for
+              pencils, bookbags, rulers, erasers, food, clothing, materials, and
+              staff to enable our giving in the Dominican Republic.
+            </p>
+
+            <div className="flex flex-row items-center gap-4 my-2">
+              <button
+                disabled={account.address === undefined}
+                onClick={() =>
+                  handleClickMintCard(
+                    1,
+                    "0x2dc3209d13165db78b86529012ec73aef86d2449",
+                    0.002277
+                  )
+                }
+                className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2"
+              >
+                Mint to support
+              </button>
+              <Link
+                href="https://zora.co/collect/base:0x2dc3209d13165db78b86529012ec73aef86d2449/1"
+                target="_blank"
+              >
+                View on zora
+              </Link>
+            </div>
           </div>
-        ))}
-      </div> */}
+        </div>
+      </div>
 
       <div className="grid lg:grid-cols-3 w-[85vw] justify-between grid-cols-1">
         {mintToSupport.map((mint, index) => (
@@ -259,6 +320,10 @@ function Mints() {
             <img
               src={mint.img}
               alt={mint.title}
+              style={{ transformStyle: "preserve-3d" }}
+              ref={(el): any =>
+                (containerRefsNew.current[index] = el as HTMLImageElement)
+              }
               className="rounded-[24px] xl:h-[350px] h-[320px] block object-cover object-center border-solid border-b-4 border-r-4 border-white"
             />
 
@@ -268,7 +333,22 @@ function Mints() {
                 <br />
                 For The Children
               </p>
-              <button className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2">
+              <button
+                disabled={account.address === undefined}
+                // style={
+                //   account.address === undefined
+                //     ? { display: "none" }
+                //     : { display: "flex" }
+                // }
+                onClick={() =>
+                  handleClickMintCard(
+                    mint.token,
+                    mint.contractAddress,
+                    mint.mintFee
+                  )
+                }
+                className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2"
+              >
                 Mint to support
               </button>
             </div>
@@ -276,10 +356,92 @@ function Mints() {
         ))}
       </div>
 
-      <button className="py-4 rounded-full w-[80vw] border border-solid border-white">
-        See earlier mints
+      <div
+        style={displayOldMints ? { display: "grid" } : { display: "none" }}
+        className="lg:grid-cols-3 w-[85vw] justify-between grid-cols-1"
+      >
+        {mintData.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center mb-10 bg-[--blue] xl:min-h-[350px] min-h-[320px]"
+          >
+            <div
+              ref={(ele): any =>
+                (containerRefs.current[index] = ele as HTMLDivElement)
+              }
+              className="bg-[--blue] relative inline-block lg:h-[350px] h-[320px] overflow-hidden rounded-3xl"
+            >
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt="cat image"
+                  loading="lazy"
+                  className="xl:w-[350px] xl:min-h-[350px] w-[320px] min-h-[320px] block object-cover rounded-3xl"
+                />
+              ) : (
+                <video
+                  src={item.video}
+                  preload="auto"
+                  autoPlay={true}
+                  loop={true}
+                  muted={true}
+                  playsInline={true}
+                  className="xl:w-[350px] xl:min-h-[350px] w-[320px] min-h-[320px] block object-cover rounded-3xl"
+                ></video>
+              )}
+            </div>
+
+            <div className="py-3 xl:w-[350px] w-[320px] mx-auto ">
+              <button
+                disabled={account.address === undefined}
+                // style={
+                //   account.address === undefined
+                //     ? { display: "none" }
+                //     : { display: "flex" }
+                // }
+                onClick={() =>
+                  handleClickMintCard(
+                    item.token,
+                    item.contractAddress,
+                    item.mintFee
+                  )
+                }
+                className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2"
+              >
+                Mint to support
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={() => setDisplayOldMints(!displayOldMints)}
+        className="py-4 rounded-full w-[80vw] border border-solid border-white"
+      >
+        {displayOldMints ? "Hide" : "See"} earlier mints
       </button>
     </section>
+  );
+}
+
+function MagnetBackground() {
+  return (
+    <div className="absolute z-[100] -top-[130px] left-[100px]">
+      <svg
+        width="750"
+        height="750"
+        viewBox="0 0 915 750"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          opacity="0.1"
+          d="M836.363 242.342C727.157 53.2305 544.999 -45.9129 429.303 20.7795C394.617 40.6977 370.001 73.3725 355.232 114.328C263.929 42.4881 163.674 17.8701 90.2736 60.3921C-25.4217 127.085 -30.5687 334.547 78.6369 523.658C187.843 712.769 370.001 811.913 485.697 745.22C520.383 725.302 544.999 692.627 559.768 651.672C651.072 723.512 751.326 748.13 824.726 705.608C940.422 638.915 945.569 431.453 836.363 242.342Z"
+          fill="white"
+        />
+      </svg>
+    </div>
   );
 }
 

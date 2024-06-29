@@ -164,29 +164,39 @@ export const mintData: {
   },
 ];
 
-export const mintToSupport = [
-  {
-    img: doge.src,
-    title: "Doge is",
-  },
-  {
-    img: guild.src,
-    title: "Guild is",
-  },
-  {
-    img: zorb.src,
-    title: "Zorb is",
-  },
-  {
-    img: based_studio.src,
-    title: "Based Studio is",
-  },
+export const mintToSupport: {
+  contractAddress: `0x${string}`;
+  mintFee: number;
+  token: number;
+  img: string;
+  title: string;
+}[] = [
+  // {
+  //   img: doge.src,
+  //   title: "Doge is",
+  // },
+  // {
+  //   img: guild.src,
+  //   title: "Guild is",
+  // },
   {
     img: zorb.src,
     title: "Zorb is",
+    token: 5,
+    contractAddress: "0x00edeea9bdc073823603041f3549f1ab598002b1",
+    mintFee: 0.002467,
   },
-  {
-    img: doge.src,
-    title: "Doge is",
-  },
+
+  // {
+  //   img: based_studio.src,
+  //   title: "Based Studio is",
+  // },
+  // {
+  //   img: zorb.src,
+  //   title: "Zorb is",
+  // },
+  // {
+  //   img: doge.src,
+  //   title: "Doge is",
+  // },
 ];

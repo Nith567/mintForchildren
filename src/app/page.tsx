@@ -1,8 +1,10 @@
+import Border from "@/components/border";
 import FAQ from "@/components/faq";
-import FeaturedMints from "@/components/featuredmints";
 import Hero from "@/components/hero";
 import MintCountDown from "@/components/mintcountdown";
 import Mints from "@/components/mints";
+import PhaseOne from "@/components/phase_one";
+import PhaseTwo from "@/components/phase_two";
 import Connect from "@/components/wallet";
 
 export default function Home() {
@@ -11,9 +13,13 @@ export default function Home() {
       <Connect />
       <Hero />
       <MintCountDown />
-      <FeaturedMints />
       <Mints />
-      {/* <FAQ /> */}
+      <Border />
+      <FAQ />
+      <Border />
+      <PhaseOne />
+      <Border />
+      <PhaseTwo />
     </>
   );
 }

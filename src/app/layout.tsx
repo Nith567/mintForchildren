@@ -45,7 +45,7 @@ export default function RootLayout({
           <link rel="icon" href="/favicon.ico" sizes="any" />
           <meta property="og:image" content="/og.jpg" />
         </Head>
-        <body className={inter.className}>
+        <body className={inter.className + " bg-[--blue] text-white"}>
           <div className="lg:hidden block">
             <Image
               src="https://cdn.prod.website-files.com/666246aaeddc718e33bdf357/66624b920dbacd682221c71c_shaolin%20art%20center%20mark.svg"
