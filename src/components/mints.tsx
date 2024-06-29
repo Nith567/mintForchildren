@@ -115,10 +115,10 @@ function Mints() {
   function handle3DHover(el: HTMLImageElement | HTMLDivElement | null) {
     if (!el) return;
 
-    const handleMove = (e: MouseEvent) => {
+    const handleMove = (e: Event) => {
       const rect = el.getBoundingClientRect();
-      const xVal = e.clientX - rect.left;
-      const yVal = e.clientY - rect.top;
+      const xVal = (e as MouseEvent).clientX - rect.left;
+      const yVal = (e as MouseEvent).clientY - rect.top;
 
       const height = el.clientHeight;
       const width = el.clientWidth;
