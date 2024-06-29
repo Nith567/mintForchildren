@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Footer from "@/components/footer";
 import Head from "next/head";
 import { Providers } from "./providers";
 import ogImage from "../../public/og.jpg";
-const ibm = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// const ibm = IBM_Plex_Mono({
+//   subsets: ["latin"],
+//   weight: ["400", "700"],
+// });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export const metadata: Metadata = {
   openGraph: {
@@ -44,7 +45,7 @@ export default function RootLayout({
           <link rel="icon" href="/favicon.ico" sizes="any" />
           <meta property="og:image" content="/og.jpg" />
         </Head>
-        <body className={ibm.className}>
+        <body className={inter.className}>
           <div className="lg:hidden block">
             <Image
               src="https://cdn.prod.website-files.com/666246aaeddc718e33bdf357/66624b920dbacd682221c71c_shaolin%20art%20center%20mark.svg"

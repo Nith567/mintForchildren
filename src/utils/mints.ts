@@ -1,3 +1,8 @@
+import doge from "../../public/mints/doge.png";
+import guild from "../../public/mints/guild.png";
+import based_studio from "../../public/mints/based_studio.png";
+import zorb from "../../public/mints/zorb.png";
+
 export const mintData: {
   contractAddress: `0x${string}`;
   mintFee: number;
@@ -156,5 +161,32 @@ export const mintData: {
     mintFee: 0.001777,
     image:
       "https://zora.co/api/thumbnail/og/8453/0xfbd83305fdf9f342fb4e48184dcc6654235f0bbe/1",
+  },
+];
+
+export const mintToSupport = [
+  {
+    img: doge.src,
+    title: "Doge is",
+  },
+  {
+    img: guild.src,
+    title: "Guild is",
+  },
+  {
+    img: zorb.src,
+    title: "Zorb is",
+  },
+  {
+    img: based_studio.src,
+    title: "Based Studio is",
+  },
+  {
+    img: zorb.src,
+    title: "Zorb is",
+  },
+  {
+    img: doge.src,
+    title: "Doge is",
   },
 ];

@@ -1,4 +1,5 @@
 import FAQ from "@/components/faq";
+import FeaturedMints from "@/components/featuredmints";
 import Hero from "@/components/hero";
 import MintCountDown from "@/components/mintcountdown";
 import Mints from "@/components/mints";
@@ -10,8 +11,9 @@ export default function Home() {
       <Connect />
       <Hero />
       <MintCountDown />
+      <FeaturedMints />
       <Mints />
-      <FAQ />
+      {/* <FAQ /> */}
     </>
   );
 }

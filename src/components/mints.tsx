@@ -3,9 +3,9 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { useAccount, useSwitchAccount } from "wagmi";
-import { base} from "wagmi/chains";
-import { mintData } from "@/utils/mints";
-import { getAccount } from '@wagmi/core'
+import { base } from "wagmi/chains";
+import { mintData, mintToSupport } from "@/utils/mints";
+import { getAccount } from "@wagmi/core";
 import { Address, encodeAbiParameters, http, parseEther } from "viem";
 import { writeContract } from "@wagmi/core";
 import { zoraMintAbi } from "@/utils/abi";
@@ -60,10 +60,10 @@ function Mints() {
   async function handleMint() {
     const account = getAccount(config);
     account.chain = base;
-    const { connector } =getAccount(config);
-if (connector?.switchChain) {
- await connector?.switchChain({ chainId: base.id});
-       }
+    const { connector } = getAccount(config);
+    if (connector?.switchChain) {
+      await connector?.switchChain({ chainId: base.id });
+    }
     if (!transaction) return;
     try {
       const minterArguments = encodeAbiParameters(
@@ -90,9 +90,9 @@ if (connector?.switchChain) {
         chainId: base.id,
         chain: base,
       });
-      console.log(result)
+      console.log(result);
     } catch (e) {
-      console.log("declined",e);
+      console.log("declined", e);
     }
   }
 
@@ -106,9 +106,12 @@ if (connector?.switchChain) {
   }
 
   return (
-    <section id="art" className="p-[3vw] lg:p-[7vw] bg-[--blue]">
+    <section
+      id="art"
+      className="p-[3vw] lg:p-[7vw] flex flex-col items-center bg-[--blue] text-white"
+    >
       {/*********************** DIALOG BOX *********************************/}
-      {displayDialog && (
+      {/* {displayDialog && (
         <div
           onClick={() => setDisplayDialog(false)}
           className="h-screen w-screen flex items-center justify-center bg-black/80 fixed top-0 left-0 z-[5000]"
@@ -193,9 +196,9 @@ if (connector?.switchChain) {
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-5 w-[90vw] lg:w-[40vw] mx-auto">
+      {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-5 w-[90vw] lg:w-[40vw] mx-auto">
         {mintData.map((item, index) => (
           <div
             key={index}
@@ -248,7 +251,34 @@ if (connector?.switchChain) {
             </button>
           </div>
         ))}
+      </div> */}
+
+      <div className="grid lg:grid-cols-3 w-[85vw] justify-between grid-cols-1">
+        {mintToSupport.map((mint, index) => (
+          <div key={index} className="flex items-center flex-col gap-4 mb-10">
+            <img
+              src={mint.img}
+              alt={mint.title}
+              className="rounded-[24px] xl:h-[350px] h-[320px] block object-cover object-center border-solid border-b-4 border-r-4 border-white"
+            />
+
+            <div className="xl:w-[350px] w-[320px] flex flex-col gap-4 p-0.5 items-start">
+              <p className="font-semibold text-3xl">
+                {mint.title}
+                <br />
+                For The Children
+              </p>
+              <button className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2">
+                Mint to support
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
+
+      <button className="py-4 rounded-full w-[80vw] border border-solid border-white">
+        See earlier mints
+      </button>
     </section>
   );
 }
