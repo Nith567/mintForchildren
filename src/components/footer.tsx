@@ -42,13 +42,10 @@ function Footer() {
 
         <div className="flex flex-col items-center gap-5">
           <div className="flex flex-row items-center gap-2.5">
-            <Link
-              href="https://warpcast.com/~/channel/thecreators"
-              target="_blank"
-            >
+            <Link href="https://warpcast.com/~/channel/thecreators">
               <Gate />
             </Link>
-            <Link href="https://x.com/thecreatorsllc" target="_blank">
+            <Link href="https://x.com/thecreatorsllc">
               <Twitter />
             </Link>
           </div>

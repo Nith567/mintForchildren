@@ -166,37 +166,42 @@ export const mintData: {
 
 export const mintToSupport: {
   contractAddress: `0x${string}`;
-  mintFee: number;
-  token: number;
+  mintFee?: number;
+  platform: "zora" | "guild";
+  token?: number;
   img: string;
   title: string;
 }[] = [
-  // {
-  //   img: doge.src,
-  //   title: "Doge is",
-  // },
-  // {
-  //   img: guild.src,
-  //   title: "Guild is",
-  // },
+  {
+    img: doge.src,
+    title: "Doge is",
+    platform: "guild",
+    // token: 2,
+    contractAddress: "0xb1246908469b531a62658f090916c0cf9283cede",
+    // mintFee: 0.003467,
+  },
+  {
+    img: guild.src,
+    title: "Guild is",
+    platform: "guild",
+    // token: 2,
+    contractAddress: "0xecd051eb2563969aed3f59203d62a8f54b29a9f1",
+    // mintFee: 0.003467,
+  },
   {
     img: zorb.src,
     title: "Zorb is",
+    platform: "zora",
     token: 5,
     contractAddress: "0x00edeea9bdc073823603041f3549f1ab598002b1",
     mintFee: 0.002467,
   },
-
-  // {
-  //   img: based_studio.src,
-  //   title: "Based Studio is",
-  // },
-  // {
-  //   img: zorb.src,
-  //   title: "Zorb is",
-  // },
-  // {
-  //   img: doge.src,
-  //   title: "Doge is",
-  // },
+  {
+    img: based_studio.src,
+    title: "Based Studio is",
+    platform: "zora",
+    token: 2,
+    contractAddress: "0x2dc3209d13165db78b86529012ec73aef86d2449",
+    mintFee: 0.003467,
+  },
 ];

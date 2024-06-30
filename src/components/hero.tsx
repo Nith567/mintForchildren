@@ -115,7 +115,6 @@ function Hero() {
           />
         </p>
         <Link
-          target="_blank"
           style={{
             height: `${dimension.height}vh`,
             width: `${dimension.width}vw`,

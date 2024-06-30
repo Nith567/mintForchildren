@@ -25,6 +25,7 @@ import squog from "../../public/sponsors/squoge.png";
 import stonks from "../../public/sponsors/stonks.png";
 import taiko from "../../public/sponsors/taiko.png";
 import creators from "../../public/sponsors/thecreators.png";
+import Link from "next/link";
 
 const sponsors = [
   abante,
@@ -84,7 +85,10 @@ function PhaseTwo() {
 
       <div className="grid grid-cols-4 lg:grid-cols-5 gap-3 lg:gap-10 justify-between">
         {sponsors.map((sponsor, index) => (
-          <div className="h-[70px] w-auto flex-col flex items-center justify-center">
+          <div
+            key={index}
+            className="h-[70px] w-auto flex-col flex items-center justify-center"
+          >
             <Image
               src={sponsor}
               alt="Sponsors"
@@ -103,9 +107,12 @@ function PhaseTwo() {
             Interested in helping us? Your brand or name can appear in the
             documentary, on merch or at the events in Shaolin Art Center
           </p>
-          <button className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2">
+          <Link
+            href="https://app.deform.cc/form/8bfa649c-8f6f-4c2c-a854-8e14fb0f3fef/"
+            className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2"
+          >
             Fill out a form
-          </button>
+          </Link>
         </div>
         <div className="relative">
           <Image

@@ -123,37 +123,34 @@ function Mints() {
       const height = el.clientHeight;
       const width = el.clientWidth;
 
-      const yRotation = 20 * ((xVal - width / 2) / width);
-      const xRotation = -20 * ((yVal - height / 2) / height);
+      const yRotation = 10 * ((xVal - width / 2) / width);
+      const xRotation = -10 * ((yVal - height / 2) / height);
 
-      const transformString = `perspective(500px) scale(1) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+      const transformString = `perspective(500px) rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
       el.style.transform = transformString;
     };
 
     const resetTransform = () => {
-      el.style.transform = "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+      el.style.transform = "perspective(500px) rotateX(0) rotateY(0)";
     };
 
     el.addEventListener("mousemove", handleMove);
     el.addEventListener("mouseout", resetTransform);
     el.addEventListener("mousedown", () => {
-      el.style.transform =
-        "perspective(500px) scale(0.9) rotateX(0) rotateY(0)";
+      el.style.transform = "perspective(500px) rotateX(0) rotateY(0)";
     });
     el.addEventListener("mouseup", () => {
-      el.style.transform = "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+      el.style.transform = "perspective(500px) rotateX(0) rotateY(0)";
     });
 
     return () => {
       el.removeEventListener("mousemove", handleMove);
       el.removeEventListener("mouseout", resetTransform);
       el.removeEventListener("mousedown", () => {
-        el.style.transform =
-          "perspective(500px) scale(0.9) rotateX(0) rotateY(0)";
+        el.style.transform = "perspective(500px) rotateX(0) rotateY(0)";
       });
       el.removeEventListener("mouseup", () => {
-        el.style.transform =
-          "perspective(500px) scale(1) rotateX(0) rotateY(0)";
+        el.style.transform = "perspective(500px) rotateX(0) rotateY(0)";
       });
     };
   }
@@ -303,10 +300,7 @@ function Mints() {
               >
                 Mint to support
               </button>
-              <Link
-                href="https://zora.co/collect/base:0x2dc3209d13165db78b86529012ec73aef86d2449/1"
-                target="_blank"
-              >
+              <Link href="https://zora.co/collect/base:0x2dc3209d13165db78b86529012ec73aef86d2449/1">
                 View on zora
               </Link>
             </div>
@@ -341,11 +335,13 @@ function Mints() {
                 //     : { display: "flex" }
                 // }
                 onClick={() =>
-                  handleClickMintCard(
-                    mint.token,
-                    mint.contractAddress,
-                    mint.mintFee
-                  )
+                  mint.platform === "zora"
+                    ? handleClickMintCard(
+                        mint.token as number,
+                        mint.contractAddress,
+                        mint.mintFee as number
+                      )
+                    : window.alert(" -- GUILD -- ")
                 }
                 className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2"
               >

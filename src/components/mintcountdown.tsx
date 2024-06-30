@@ -25,8 +25,8 @@ function MintCountDown() {
   }, []);
 
   function calculateTimeLeft(): TimeLeft | null {
-    // June 17, 12:00 AM PST (7:00 AM UTC)
-    const targetDate = new Date("2024-06-17T07:00:00Z");
+    // July 27, 00:00 AM UTC
+    const targetDate = new Date("2024-07-27T00:00:00Z");
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
 
