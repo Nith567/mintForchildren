@@ -341,7 +341,8 @@ function Mints() {
                         mint.contractAddress,
                         mint.mintFee as number
                       )
-                    : window.alert(" -- GUILD -- ")
+                    : 
+                    window.open(`https://guild.xyz/wu-tang/collect/base_mainnet/${mint.contractAddress}`,'_blank', 'noopener,noreferrer')
                 }
                 className="rounded-full font-[500] text-[--blue] bg-white px-4 py-2"
               >
